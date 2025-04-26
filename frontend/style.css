@@ -1,7 +1,7 @@
-
+/* General body style with new background */
 body {
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: url('Hostel home.jpg') no-repeat center center fixed;
+  background: url('Hostel r&L.jpg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -13,49 +13,51 @@ body {
   animation: fadeInBackground 2s ease-in-out;
 }
 
-
+/* Background fade-in animation */
 @keyframes fadeInBackground {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-
+/* Dark overlay */
 .overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.65); /* stronger darkness */
   z-index: -1;
 }
 
-
+/* Main heading style */
 h2 {
   text-align: center;
-  color: #f1f1f1;
-  font-size: 2.5rem;
-  margin-bottom: 25px;
-  letter-spacing: 1px;
+  color: #f9f9f9;
+  font-size: 2.7rem;
+  margin-bottom: 30px;
+  letter-spacing: 1.5px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
 }
 
-/* Form container styling */
+/* Form container with glassmorphism effect */
 .form-container {
   max-width: 400px;
   margin: auto;
-  padding: 30px 25px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  padding: 35px 30px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-/* Input and select styling */
+/* Input, select, button style */
 input, select, button {
   width: 100%;
   padding: 14px;
-  margin: 10px 0;
+  margin: 12px 0;
   font-size: 1rem;
   border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 8px;
+  border-radius: 10px;
   background: rgba(255,255,255,0.15);
   color: white;
   transition: all 0.3s ease;
@@ -64,36 +66,36 @@ input, select, button {
 /* Input focus effect */
 input:focus, select:focus {
   background: rgba(255,255,255,0.25);
-  border-color: #4CAF50;
+  border-color: #00FFC6;
   outline: none;
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.7);
+  box-shadow: 0 0 10px rgba(0, 255, 198, 0.7);
 }
 
-/* Button styling */
+/* Button style */
 button {
-  background: #4CAF50;
-  color: white;
-  border: none;
+  background: #00FFC6;
+  color: #2c3e50;
   font-weight: bold;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  border-radius: 8px;
   transition: background 0.3s ease, transform 0.2s;
 }
 
-/* Button hover effect */
+/* Button hover */
 button:hover {
-  background: #45a049;
+  background: #00e6b3;
   transform: translateY(-2px);
 }
 
-/* Link for switching forms */
+/* Text links */
 p {
-  margin-top: 15px;
+  margin-top: 18px;
   text-align: center;
 }
 
 p a {
-  color: #4CAF50;
+  color: #00FFC6;
   text-decoration: none;
   font-weight: bold;
 }
@@ -111,10 +113,10 @@ p a:hover {
 @media (max-width: 500px) {
   .form-container {
     margin: 20px;
-    padding: 20px;
+    padding: 25px;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 }
