@@ -37,11 +37,9 @@ The **Campus Hostel Management System** is a web application that enables studen
 | Filter Applications by Email | ✅ |
 | Persistent Auth via localStorage | ✅ |
 
+**Testing locally**
+1. Clone the frontend repo.
 
-1. Clone the frontend repo:
-
-   git clone https://github.com/yourusername/student-housing-frontend.git
-   cd student-housing-frontend
    
 2. Install dependencies:
    
