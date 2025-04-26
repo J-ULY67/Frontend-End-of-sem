@@ -1,13 +1,7 @@
-
-
-
-// point all API calls at backend:5000
-
+// point all API calls at backend
 const API_BASE = 'https://backend-end-of-sem.onrender.com';
 
-
 // Auth helpers
-
 let token = localStorage.getItem('token');
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -32,30 +26,27 @@ function authHeaders() {
   };
 }
 
-// Redirect non-logged in users 
+// Redirect non-logged in users
 document.addEventListener('DOMContentLoaded', () => {
-  const publicPaths = ['/', '/index.html'];
-  if (!token && !publicPaths.includes(location.pathname)) {
+  const publicPaths = ['/', '/index.html', 'index.html'];
+  const path = location.pathname.replace(/^\//, '');
+  if (!token && !publicPaths.includes(location.pathname) && !publicPaths.includes(path)) {
     window.location.href = 'index.html';
   }
-  // display current user in nav
+
   const span = document.getElementById('currentUserInfo');
   if (span && currentUser) {
-    span.textContent = `Logged in as: ${
-      currentUser.role === 'admin' ? 'Admin' : currentUser.name
-    }`;
+    span.textContent = `Logged in as: ${currentUser.role === 'admin' ? 'Admin' : currentUser.name}`;
   }
 });
 
-
 // AUTH: register / login / logout
-
 async function register() {
-  const name      = document.getElementById('name').value;
+  const name = document.getElementById('name').value;
   const studentId = document.getElementById('studentId').value;
-  const email     = document.getElementById('regEmail').value;
-  const password  = document.getElementById('regPassword').value;
-  const role      = document.getElementById('regRole').value;
+  const email = document.getElementById('regEmail').value;
+  const password = document.getElementById('regPassword').value;
+  const role = document.getElementById('regRole').value;
 
   if (!name || !studentId || !email || !password) {
     alert("Please fill in all fields.");
@@ -72,6 +63,7 @@ async function register() {
     const err = await res.json();
     return alert(err.message);
   }
+
   const { token: tkn, user } = await res.json();
   setAuth(user, tkn);
 
@@ -89,7 +81,7 @@ function showRegister() {
 }
 
 async function login() {
-  const email    = document.getElementById('email').value;
+  const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
   const res = await fetch(`${API_BASE}/auth/login`, {
@@ -102,13 +94,13 @@ async function login() {
     const err = await res.json();
     return alert(err.message);
   }
+
   const { token: tkn, user } = await res.json();
   setAuth(user, tkn);
 
   if (user.role === 'admin') {
     window.location.href = 'admin-applications.html';
   } else {
-    // always land on dashboard
     window.location.href = 'dashboard.html';
   }
 }
@@ -119,7 +111,6 @@ function logout() {
 }
 
 // STUDENT: load hostels & apply
-
 async function loadHostelsForApply() {
   const container = document.getElementById('hostelContainer');
   if (!container) return;
@@ -127,6 +118,12 @@ async function loadHostelsForApply() {
   const res = await fetch(`${API_BASE}/hostels`, {
     headers: authHeaders()
   });
+
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
   const hostels = await res.json();
   container.innerHTML = '';
 
@@ -135,12 +132,12 @@ async function loadHostelsForApply() {
     const card = document.createElement('div');
     card.className = 'room-card';
     card.innerHTML = `
-      <img src="${h.image}" alt="${h.name}" />
+      <img src="${h.image || 'default-hostel.jpg'}" alt="${h.name}" />
       <h3>${h.name}</h3>
       <p>${h.description}</p>
       <p><strong>Type:</strong> ${h.type}</p>
       <p><strong>Occupancy:</strong> ${h.occupancy} / ${h.capacity}</p>
-      <button ${isFull? 'disabled' : ''} onclick="applyForRoom(${h.id})">
+      <button ${isFull ? 'disabled' : ''} onclick="applyForRoom(${h.id})">
         ${isFull ? 'Full' : 'Apply for this Room'}
       </button>
     `;
@@ -154,27 +151,33 @@ async function applyForRoom(hostelId) {
     headers: authHeaders(),
     body: JSON.stringify({ hostelId })
   });
+
   if (!res.ok) {
     const err = await res.json();
     return alert(err.message);
   }
+
   alert('Application submitted!');
   window.location.href = 'dashboard.html';
 }
 
-
 // STUDENT: dashboard
-
 async function renderStudentDashboard() {
   const nameSpan = document.getElementById('dashboardName');
-  const content  = document.getElementById('dashboardContent');
-  if (!content || !currentUser) return;
+  const content = document.getElementById('dashboardContent');
+  if (!nameSpan || !content || !currentUser) return;
 
   nameSpan.textContent = currentUser.name;
 
   const res = await fetch(`${API_BASE}/applications`, {
     headers: authHeaders()
   });
+
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
   const apps = await res.json();
 
   if (!apps.length) {
@@ -212,20 +215,24 @@ if (document.getElementById('dashboardContent')) {
   renderStudentDashboard();
 }
 
-
 // ADMIN: Applications
-
 async function renderAdminApplications() {
   const tableBody = document.getElementById('adminApplications');
-  const search    = document.getElementById('searchInput')?.value.toLowerCase() || '';
+  const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
   if (!tableBody) return;
 
   const res = await fetch(`${API_BASE}/applications`, {
     headers: authHeaders()
   });
-  const apps = await res.json();
 
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
+  const apps = await res.json();
   tableBody.innerHTML = '';
+
   apps
     .filter(a => a.userEmail.toLowerCase().includes(search))
     .forEach(app => {
@@ -255,20 +262,32 @@ if (document.getElementById('adminApplications')) {
 }
 
 async function approveApp(id) {
-  await fetch(`${API_BASE}/applications/${id}`, {
+  const res = await fetch(`${API_BASE}/applications/${id}`, {
     method: 'PUT',
     headers: authHeaders(),
     body: JSON.stringify({ status: 'accepted' })
   });
+
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
   renderAdminApplications();
 }
 
 async function rejectApp(id) {
-  await fetch(`${API_BASE}/applications/${id}`, {
+  const res = await fetch(`${API_BASE}/applications/${id}`, {
     method: 'PUT',
     headers: authHeaders(),
     body: JSON.stringify({ status: 'rejected' })
   });
+
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
   renderAdminApplications();
 }
 
@@ -279,21 +298,31 @@ function confirmDelete(id) {
 }
 
 async function deleteApp(id) {
-  await fetch(`${API_BASE}/applications/${id}`, {
+  const res = await fetch(`${API_BASE}/applications/${id}`, {
     method: 'DELETE',
     headers: authHeaders()
   });
+
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
   renderAdminApplications();
 }
 
-
 // ADMIN: Hostel Management
-
 async function renderHostels() {
   const container = document.getElementById('hostelList');
   if (!container) return;
 
   const res = await fetch(`${API_BASE}/hostels`, { headers: authHeaders() });
+
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
   const hostels = await res.json();
   container.innerHTML = '';
 
@@ -302,7 +331,7 @@ async function renderHostels() {
     const card = document.createElement('div');
     card.className = 'room-card';
     card.innerHTML = `
-      <img src="${h.image}" alt="${h.name}" />
+      <img src="${h.image || 'default-hostel.jpg'}" alt="${h.name}" />
       <h3>${h.name}</h3>
       <p>${h.description}</p>
       <p><strong>Type:</strong> ${h.type}</p>
@@ -318,17 +347,24 @@ if (hostelForm) {
   hostelForm.addEventListener('submit', async e => {
     e.preventDefault();
     const payload = {
-      name:        document.getElementById('hostelName').value,
+      name: document.getElementById('hostelName').value,
       description: document.getElementById('hostelDesc').value,
-      image:       document.getElementById('hostelImage').value,
-      type:        document.getElementById('hostelType').value,
-      capacity:    parseInt(document.getElementById('hostelCap').value, 10)
+      image: document.getElementById('hostelImage').value,
+      type: document.getElementById('hostelType').value,
+      capacity: parseInt(document.getElementById('hostelCap').value, 10)
     };
-    await fetch(`${API_BASE}/hostels`, {
+
+    const res = await fetch(`${API_BASE}/hostels`, {
       method: 'POST',
       headers: authHeaders(),
       body: JSON.stringify(payload)
     });
+
+    if (!res.ok) {
+      const err = await res.json();
+      return alert(err.message);
+    }
+
     hostelForm.reset();
     renderHostels();
   });
@@ -336,19 +372,23 @@ if (hostelForm) {
 
 async function deleteHostel(id) {
   if (!confirm('Delete this hostel?')) return;
-  await fetch(`${API_BASE}/hostels/${id}`, {
+
+  const res = await fetch(`${API_BASE}/hostels/${id}`, {
     method: 'DELETE',
     headers: authHeaders()
   });
+
+  if (!res.ok) {
+    const err = await res.json();
+    return alert(err.message);
+  }
+
   renderHostels();
 }
 
 if (document.getElementById('hostelList')) {
   renderHostels();
 }
-
-
-// Load hostels for student to apply
 
 if (document.getElementById('hostelContainer')) {
   loadHostelsForApply();
