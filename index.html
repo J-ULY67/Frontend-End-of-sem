@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Housing - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay"></div>
+  <h2>Hostel Royale</h2>
+  <div class="form-container">
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+  </div>
+
+  <div id="register-form" class="form-container hidden">
+    <input type="text" id="name" placeholder="Full Name" />
+    <input type="text" id="studentId" placeholder="ID" />
+    <input type="email" id="regEmail" placeholder="Email" />
+    <input type="password" id="regPassword" placeholder="Password" />
+    <label for="regRole">Role:</label>
+    <select id="regRole">
+      <option value="student" selected>Student</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button onclick="register()">Register</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
