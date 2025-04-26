@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Rooms</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <nav class="navbar">
@@ -12,8 +12,8 @@
       <h2>Admin Dashboard</h2>
     </div>
     <div class="nav-right">
-      <a href="/admin-applications.html">Applications</a>
-      <a href="/admin-rooms.html">Room Management</a>
+      <a href="admin-applications.html">Applications</a>
+      <a href="admin-rooms.html">Room Management</a>
       <span id="currentUserInfo"></span>
       <button onclick="logout()">Logout</button>
     </div>
@@ -24,6 +24,7 @@
     <input type="text" id="hostelName" placeholder="Hostel Name" required />
     <input type="text" id="hostelDesc" placeholder="Description" required />
     <input type="text" id="hostelImage" placeholder="Image URL" required />
+    <label for="hostelType">Room Type:</label>
     <select id="hostelType">
       <option value="Single">Single</option>
       <option value="Double">Double</option>
@@ -34,6 +35,6 @@
   </form>
   <div id="hostelList" class="room-grid"></div>
 
-  <script src="/javascript/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
