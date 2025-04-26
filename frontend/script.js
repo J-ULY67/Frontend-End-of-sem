@@ -1,5 +1,6 @@
 // point all API calls at backend
-const API_BASE = 'https://backend-end-of-sem.onrender.com';
+const API_BASE = 'https://backend-end-of-sem.onrender.com/api';
+
 
 // Auth helpers
 let token = localStorage.getItem('token');
