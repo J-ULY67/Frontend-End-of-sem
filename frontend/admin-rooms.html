@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Rooms</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <h2>Admin Dashboard</h2>
+    </div>
+    <div class="nav-right">
+      <a href="/admin-applications.html">Applications</a>
+      <a href="/admin-rooms.html">Room Management</a>
+      <span id="currentUserInfo"></span>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <h3>Manage Hostels & Rooms</h3>
+  <form id="hostelForm">
+    <input type="text" id="hostelName" placeholder="Hostel Name" required />
+    <input type="text" id="hostelDesc" placeholder="Description" required />
+    <input type="text" id="hostelImage" placeholder="Image URL" required />
+    <select id="hostelType">
+      <option value="Single">Single</option>
+      <option value="Double">Double</option>
+      <option value="Quad">Quad</option>
+    </select>
+    <input type="number" id="hostelCap" placeholder="Capacity" required />
+    <button type="submit">Add Room</button>
+  </form>
+  <div id="hostelList" class="room-grid"></div>
+
+  <script src="/javascript/script.js"></script>
+</body>
+</html>

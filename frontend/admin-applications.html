@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin - Applications</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <h2>Admin Dashboard</h2>
+    </div>
+    <div class="nav-right">
+      <a href="/admin-applications.html">Applications</a>
+      <a href="/admin-rooms.html">Room Management</a>
+      <span id="currentUserInfo"></span>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Student Applications</h2>
+
+    <!-- Search bar -->
+    <input type="text" id="searchInput" placeholder="Search by student email..." oninput="filterApplications()">
+
+    <!-- Application list -->
+    <table class="app-table">
+      <thead>
+        <tr>
+          <th>Student Email</th>
+          <th>Hostel</th>
+          <th>Room Type</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="adminApplications"></tbody>
+    </table>
+  </div>
+  <script src="/javascript/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Housing - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Student Housing Portal</h2>
+  <div class="form-container">
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+  </div>
+
+  <div id="register-form" class="form-container hidden">
+    <input type="text" id="name" placeholder="Full Name" />
+    <input type="text" id="studentId" placeholder="ID" />
+    <input type="email" id="regEmail" placeholder="Email" />
+    <input type="password" id="regPassword" placeholder="Password" />
+    <select id="regRole">
+      <option value="student" selected>Student</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button onclick="register()">Register</button>
+  </div>
+
+  <script src="/javascript/script.js"></script>
+</body>
+</html>
