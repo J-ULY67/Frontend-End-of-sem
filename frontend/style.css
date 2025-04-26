@@ -1,4 +1,4 @@
-/* General body style with new background */
+/* === GENERAL BODY === */
 body {
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: url('Hostel r&L.jpg') no-repeat center center fixed;
@@ -13,7 +13,7 @@ body {
   animation: fadeInBackground 2s ease-in-out;
 }
 
-/* Background fade-in animation */
+/* Fade-in background animation */
 @keyframes fadeInBackground {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -23,11 +23,11 @@ body {
 .overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.65); /* stronger darkness */
+  background: rgba(0, 0, 0, 0.65);
   z-index: -1;
 }
 
-/* Main heading style */
+/* === HEADINGS === */
 h2 {
   text-align: center;
   color: #f9f9f9;
@@ -37,7 +37,7 @@ h2 {
   text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
 }
 
-/* Form container with glassmorphism effect */
+/* === FORM CONTAINER === */
 .form-container {
   max-width: 400px;
   margin: auto;
@@ -50,7 +50,7 @@ h2 {
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-/* Input, select, button style */
+/* === INPUTS, SELECTS, BUTTONS === */
 input, select, button {
   width: 100%;
   padding: 14px;
@@ -63,7 +63,6 @@ input, select, button {
   transition: all 0.3s ease;
 }
 
-/* Input focus effect */
 input:focus, select:focus {
   background: rgba(255,255,255,0.25);
   border-color: #00FFC6;
@@ -71,7 +70,7 @@ input:focus, select:focus {
   box-shadow: 0 0 10px rgba(0, 255, 198, 0.7);
 }
 
-/* Button style */
+/* === BUTTONS === */
 button {
   background: #00FFC6;
   color: #2c3e50;
@@ -82,13 +81,12 @@ button {
   transition: background 0.3s ease, transform 0.2s;
 }
 
-/* Button hover */
 button:hover {
   background: #00e6b3;
   transform: translateY(-2px);
 }
 
-/* Text links */
+/* === LINKS === */
 p {
   margin-top: 18px;
   text-align: center;
@@ -104,12 +102,12 @@ p a:hover {
   text-decoration: underline;
 }
 
-/* Hide register form initially */
+/* === HIDE REGISTER FORM INITIALLY === */
 .hidden {
   display: none;
 }
 
-/* Mobile responsiveness */
+/* === MOBILE RESPONSIVENESS === */
 @media (max-width: 500px) {
   .form-container {
     margin: 20px;
@@ -119,4 +117,95 @@ p a:hover {
   h2 {
     font-size: 2.2rem;
   }
+}
+
+/* === ADMIN DASHBOARD TABLE === */
+.admin-applications {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.admin-applications th, .admin-applications td {
+  padding: 16px;
+  text-align: center;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.admin-applications th {
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.admin-applications tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+/* === APPLICATION STATUS BADGES === */
+.badge {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: inline-block;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.badge.pending {
+  background-color: #f39c12;
+  color: #fff3e0;
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.7);
+}
+
+.badge.accepted {
+  background-color: #2ecc71;
+  color: #eaffea;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.7);
+}
+
+.badge.rejected {
+  background-color: #e74c3c;
+  color: #ffe6e6;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.7);
+}
+
+/* === ADMIN ACTION BUTTONS === */
+.admin-action-buttons button {
+  padding: 8px 14px;
+  margin: 5px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-action-buttons button:hover {
+  transform: scale(1.05);
+}
+
+.admin-action-buttons button:nth-child(1) { /* Approve button */
+  background-color: #2ecc71;
+  color: white;
+}
+
+.admin-action-buttons button:nth-child(2) { /* Reject button */
+  background-color: #e74c3c;
+  color: white;
+}
+
+.admin-action-buttons button:nth-child(3) { /* Delete button */
+  background-color: #3498db;
+  color: white;
 }

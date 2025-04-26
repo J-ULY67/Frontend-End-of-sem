@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Dark overlay background -->
+  <div class="overlay"></div>
+
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-left">
       <h2>Admin Dashboard</h2>
@@ -19,14 +24,15 @@
     </div>
   </nav>
 
+  <!-- Main container -->
   <div class="container">
     <h2>Student Applications</h2>
 
     <!-- Search bar -->
-    <input type="text" id="searchInput" placeholder="Search by student email..." oninput="filterApplications()">
+    <input type="text" id="searchInput" placeholder="Search by student email..." oninput="filterApplications()" />
 
-    <!-- Application list -->
-    <table class="app-table">
+    <!-- Application Table -->
+    <table class="admin-applications">
       <thead>
         <tr>
           <th>Student Email</th>
@@ -39,6 +45,7 @@
       <tbody id="adminApplications"></tbody>
     </table>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
