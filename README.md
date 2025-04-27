@@ -5,7 +5,7 @@
 ## Overview
 The **Campus Hostel Management System** is a web application that enables students to apply for hostel rooms and allows admins to manage hostel room availability and student applications. The system supports user registration, login, role-based dashboards, hostel browsing and application submission, and admin-side approval/rejection of applications.
 
-- **GitHub pages:** https://j-uly67.github.io/Frontend-End-of-sem/
+- **GitHub pages:** [https://j-uly67.github.io/Frontend-End-of-sem/](https://j-uly67.github.io/Frontend-End-of-sem/)
 - **Render** [https://frontend-end-of-sem.onrender.com](https://frontend-end-of-sem.onrender.com)
 
 - ## Login Details (for testing)
@@ -56,6 +56,7 @@ The **Campus Hostel Management System** is a web application that enables studen
 ##  Notes
 
 - Ensure the backend is running on `http://localhost:5000` when testing locally.
-- The frontend expects API responses from that port (`API_BASE` is hardcoded as `http://localhost:5000/api` in `script.js`).
+- When running on render, it might take sometime to login.
+
 
  
