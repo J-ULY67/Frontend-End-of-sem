@@ -56,7 +56,8 @@ The **Campus Hostel Management System** is a web application that enables studen
 ##  Notes
 
 - Ensure the backend is running on `http://localhost:5000` when testing locally.
-- When running on render, it might take sometime to login.
+- When running on render, it might take sometime to login. But to run it, you click on the render link above.
+- To run on the github pages too, you click on the github pages link above.
 
 
  
